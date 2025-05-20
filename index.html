@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom DataTable</title>
+
+    <!-- Bootstrap & DataTables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <style>
+      #dropdownResults {
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: #fff;
+        cursor: pointer;
+        z-index: 1050;
+        display: none;
+      }
+
+      .position-relative-wrapper {
+        position: relative;
+      }
+
+      table.dataTable thead th {
+        background-color: rgb(142, 142, 147);
+        border-radius: 0.2rem;
+      }
+
+      table.dataTable tbody tr:nth-child(odd) td {
+        background-color: rgb(174, 174, 178);
+        border-radius: 0.2rem;
+      }
+
+      table.dataTable tbody tr:nth-child(even) td {
+        background-color: rgb(199, 199, 204);
+        border-radius: 0.2rem;
+      }
+
+      table.dataTable tbody tr:hover td {
+        background-color: rgb(229, 229, 234);
+        cursor: pointer;
+      }
+
+      #productTable th:first-child,
+      #productTable td:first-child {
+        width: 40px;
+        text-align: center;
+      }
+
+      #productTable th:nth-child(2),
+      #productTable td:nth-child(2) {
+        width: 300px;
+      }
+
+      #productTable th:nth-child(3),
+      #productTable td:nth-child(3) {
+        width: 40px;
+      }
+
+      #productTable th:nth-child(4),
+      #productTable td:nth-child(4),
+      #productTable th:nth-child(5),
+      #productTable td:nth-child(5),
+      #productTable th:nth-child(6),
+      #productTable td:nth-child(6) {
+        width: 100px;
+        text-align: right;
+      }
+
+      #productTable th:nth-child(7),
+      #productTable td:nth-child(7) {
+        width: 40px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="card">
+        <!-- Totals Summary Card -->
+        <div class="mt-3 d-flex justify-content-end gap-2">
+          <div class="card px-3 py-2" style="cursor: pointer">
+            <h6 class="mb-0">
+              Total Price: ₹<span id="totalPrice">0.00</span>
+            </h6>
+          </div>
+          <div class="card px-3 py-2" style="cursor: pointer">
+            <h6 class="mb-0">
+              Total Saving: ₹<span id="totalSaving">0.00</span>
+            </h6>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Search Input -->
+          <div class="mb-3 position-relative-wrapper">
+            <label for="productSearch" class="form-label fw-bold"
+              >Search Product</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="productSearch"
+              placeholder="Type product name..."
+              autocomplete="off"
+            />
+            <ul
+              class="list-group position-absolute w-100 shadow-sm border"
+              id="dropdownResults"
+            ></ul>
+          </div>
+
+          <!-- DataTable -->
+          <div class="table-responsive">
+            <table id="productTable" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Item</th>
+                  <th>Qty</th>
+                  <th>Our price</th>
+                  <th>Avg. Market Price</th>
+                  <th>Your Saving*</th>
+                  <th><i class="bi bi-cart"></i></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <button type="button" class="btn btn-secondary" id="submitBtn">
+              Order Now
+            </button>
+          </div>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="otpModal"
+            tabindex="-1"
+            aria-labelledby="otpModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="otpModalLabel">
+                    Mobile Number Verification
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Mobile Number Input -->
+                  <div class="mb-3">
+                    <label for="mobileNo" class="form-label"
+                      >Mobile Number</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="mobileNo"
+                      placeholder="Enter Mobile Number"
+                    />
+                  </div>
+
+                  <!-- Send OTP Button -->
+                  <button type="button" class="btn btn-primary" id="sendOtpBtn">
+                    Verify Mobile Number
+                  </button>
+
+                  <hr />
+
+                  <!-- OTP Input Fields (Initially Hidden) -->
+                  <div id="otpSection" style="display: none">
+                    <div class="mb-3">
+                      <label for="otp1" class="form-label">Enter OTP</label>
+                      <div class="d-flex gap-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="otp1"
+                          maxlength="1"
+                          style="width: 50px"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="otp2"
+                          maxlength="1"
+                          style="width: 50px"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="otp3"
+                          maxlength="1"
+                          style="width: 50px"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="otp4"
+                          maxlength="1"
+                          style="width: 50px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    id="verifyOtpBtn"
+                    style="display: none"
+                  >
+                    Verify OTP
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Undo Notification -->
+          <div class="mt-3 text-center">
+            <div id="undoNotification" class="alert alert-warning d-none">
+              Row deleted.
+              <button class="btn btn-sm btn-secondary" id="undoBtn">
+                Undo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/javascript/index.js"></script>
+  </body>
+</html>
