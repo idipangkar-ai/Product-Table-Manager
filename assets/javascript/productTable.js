@@ -1,4 +1,4 @@
-console.log("Script loaded!");
+// => ||Product Table Management Module||
 
 $(document).ready(function () {
   // Initialize variables
@@ -283,75 +283,5 @@ $(document).ready(function () {
 
     $("#totalPrice").text(totalPrice.toFixed(2));
     $("#totalSaving").text(totalSaving.toFixed(2));
-  }
-});
-
-// Collect product data from the table
-function collectTableData() {
-  const items = [];
-
-  $("#productTable tbody tr").each(function () {
-    const $row = $(this);
-    const itemName = $row.find("td").eq(1).text().trim();
-    const qty = parseInt($row.find(".qty-input").val()) || 1;
-
-    items.push({
-      item_name: itemName,
-      quantity: qty,
-    });
-  });
-
-  return { items: items };
-}
-
-// Handle Submit button click
-$("#submitBtn").on("click", function () {
-  const payload = collectTableData();
-
-  $.ajax({
-    url: "https://erpnm.forrce.com/api/method/nmpub.api.v1.mylist.index",
-    method: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(payload),
-    success: function (response) {
-      alert("Data submitted successfully!");
-      console.log("Response:", response);
-    },
-    error: function (xhr) {
-      alert("Submission failed. See console for details.");
-      console.error("Error:", xhr.responseText);
-    },
-  });
-});
-
-// Show modal when submit button is clicked
-document.getElementById("submitBtn").addEventListener("click", function () {
-  var myModal = new bootstrap.Modal(document.getElementById("otpModal"));
-  myModal.show();
-});
-
-// OTP Modal Logic
-document.getElementById("sendOtpBtn").addEventListener("click", function () {
-  document.getElementById("mobileNo").disabled = true;
-  document.getElementById("otpSection").style.display = "block";
-  document.getElementById("verifyOtpBtn").style.display = "inline-block";
-});
-
-// Verify OTP Button Logic
-document.getElementById("verifyOtpBtn").addEventListener("click", function () {
-  var otp =
-    document.getElementById("otp1").value +
-    document.getElementById("otp2").value +
-    document.getElementById("otp3").value +
-    document.getElementById("otp4").value;
-
-  if (otp.length === 4) {
-    alert("OTP Verified Successfully: " + otp);
-    var myModal = bootstrap.Modal.getInstance(
-      document.getElementById("otpModal")
-    );
-    myModal.hide();
-  } else {
-    alert("Please enter a complete OTP.");
   }
 });

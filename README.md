@@ -1,18 +1,28 @@
-# 🛒 Product Table Manager
+# 🛒 Product Cart with OTP Verification UI
 
 An interactive product table that lets user search items from an external API, add them to a table, change quantities, calculate totals, and undo deletions — all in a smooth, responsive UI.
 
 ## Features
 
-- Live product search with dropdown suggestions
-- Add products with real-time price & saving calculation
-- Editable quantity inputs
-- Row deletion with undo option
-- Total price and savings summary
+- 🔍 Live **product search** using API
+- 🛒 Dynamic **cart management**
+  - Add/remove items
+  - Change quantity
+  - Calculate price, MRP, and savings
+- 🗑️ **Undo delete** functionality
+- 📱 **Mobile OTP verification** modal
+- ✅ OTP verification
+- 🔄 All logic is modular and organized
 
-## Screenshot
+## Screenshots
 
-![App Screenshot](assets/images/image-one.png)
+#### Product Cart UI
+
+![App Screenshot](assets/images/product-table.png)
+
+#### Modal UI
+
+![App Screenshot](assets/images/modal.png)
 
 ## Tech Stack
 
@@ -21,9 +31,35 @@ An interactive product table that lets user search items from an external API, a
 - DataTables
 - Bootstrap
 
+## 📂 File Structure
+
+```
+├── .vscode
+├── assets/
+│   ├── images/
+│   └── javascript/
+│       ├── otpModel.js
+|       └── productTable.js
+│
+├── views/                          # Contains user-facing HTML views
+│   ├── desktopview.html            # Mobile-specific layout
+│   └── mobileview.html             # Desktop-specific layout
+│
+├── index.html                      # Entry point: device detection + redirect
+├── README.md
+
+```
+
 ## Getting Started
 
 1. Clone the repo:
    ```bash
    git clone https://github.com/kloudklub/nmjs.git
    cd nmjs
+   ```
+
+## 🙋‍♂️🧑‍💻 Current Maintainer Team
+
+**Forrce Infotech Solutions India Pvt Ltd.**  
+📧 Email: [info@forrce.com](mailto:info@forrce.com)  
+🌐 Website: [https://forrce.com/in/](https://forrce.com/in/)
