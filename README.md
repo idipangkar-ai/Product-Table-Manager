@@ -54,7 +54,7 @@ An interactive product table that lets user search items from an external API, a
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/kloudklub/nmjs.git
+   git clone https://github.com/idipangkar-ai/Product-Table-Manager.git
    cd nmjs
    ```
 
