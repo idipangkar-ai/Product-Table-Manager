@@ -41,11 +41,12 @@ An interactive product table that lets user search items from an external API, a
 │       ├── otpModel.js
 |       └── productTable.js
 │
-├── views/                          # Contains user-facing HTML views
-│   ├── desktopview.html            # Mobile-specific layout
-│   └── mobileview.html             # Desktop-specific layout
+├── d/                          # DIR
+│   └── index.html              # Desktop-specific layout
+├── m/                          # DIR
+│   └── index.html              # Mobile-specific layout
 │
-├── index.html                      # Entry point: device detection + redirect
+├── index.html                  # Entry point: device detection + redirect
 ├── README.md
 
 ```
@@ -54,8 +55,8 @@ An interactive product table that lets user search items from an external API, a
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/idipangkar-ai/Product-Table-Manager.git
-   cd "move/to/dir"
+   git clone https://github.com/kloudklub/nmjs.git
+   cd nmjs
    ```
 
 ## 🙋‍♂️🧑‍💻 Current Maintainer Team
