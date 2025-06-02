@@ -266,7 +266,7 @@ $(document).ready(function () {
     });
   }
 
-  // Update totals (price and saving)
+  // Update totals (price and saving) | Counter
   function updateTotals() {
     let totalPrice = 0;
     let totalSaving = 0;
@@ -281,7 +281,30 @@ $(document).ready(function () {
       totalSaving += (unitMarketPrice - unitPrice) * qty;
     });
 
-    $("#totalPrice").text(totalPrice.toFixed(2));
-    $("#totalSaving").text(totalSaving.toFixed(2));
+    // Animate the totals
+    animateCounter("totalPrice", totalPrice);
+    animateCounter("totalSaving", totalSaving);
+  }
+
+  // Function to animate the number
+  function animateCounter(elementId, targetValue) {
+    const element = document.getElementById(elementId);
+    let currentValue = parseFloat(element.textContent);
+    let increment = (targetValue - currentValue) / 100; // Increment step 4 smooth animate
+
+    function updateCounter() {
+      currentValue += increment;
+      if (
+        (increment > 0 && currentValue >= targetValue) ||
+        (increment < 0 && currentValue <= targetValue)
+      ) {
+        currentValue = targetValue;
+        clearInterval(counterInterval); // Stop | when target is reached
+      }
+      element.textContent = currentValue.toFixed(2); // Update the content of the element
+    }
+
+    // Counter animation interval.
+    const counterInterval = setInterval(updateCounter, 10);
   }
 });

@@ -88,19 +88,67 @@
   </head>
 
   <body>
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-secondary bg-secondary static-top"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="https://navamandi.com">
+          <img
+            src="https://cms.navamandi.com/calculate-my-savings/assets/images/navamandi-logo-transparent-v.png"
+            alt="..."
+            height="92"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="https://navamandi.com"
+                >Home</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <div class="container mt-5">
       <div class="card">
         <!-- Totals Summary Card -->
-        <div class="mt-3 d-flex justify-content-end gap-2">
-          <div class="card px-3 py-2" style="cursor: pointer">
-            <h6 class="mb-0">
-              Total Price: ₹<span id="totalPrice">0.00</span>
-            </h6>
-          </div>
-          <div class="card px-3 py-2" style="cursor: pointer">
-            <h6 class="mb-0">
-              Total Saving: ₹<span id="totalSaving">0.00</span>
-            </h6>
+        <div class="row mt-3">
+          <!-- Left empty 6 columns -->
+          <div class="col-md-6"></div>
+
+          <!-- Right 6 columns -->
+          <div class="col-md-6">
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="card text-center px-3 py-3" style="cursor: pointer">
+                  <h3 class="mb-0" id="totalPrice">0.00</h3>
+                  <p class="mb-0 text-muted fw-bold">Total Price</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="card text-center px-3 py-3" style="cursor: pointer">
+                  <h3 class="mb-0" id="totalSaving">0.00</h3>
+                  <p class="mb-0 text-muted fw-bold">Total Saving</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -300,6 +348,26 @@
           </div>
         </div>
       </div>
+      <!--  -->
+
+      <div class="container">
+        <h1 class="mt-4">"Calculate My Savings" - beta</h1>
+        <p>
+          is an intuitive tool developed by NavaMandi.com to help users plan and
+          manage their monthly grocery expenses more efficiently. With this
+          feature, users can build a personalized grocery list by adding or
+          removing items as needed. For every item added, the tool displays the
+          NavaMandi.com price alongside the average market price, automatically
+          calculating and showing the savings for each product. This transparent
+          comparison empowers users to clearly see how much they’re saving on
+          each item and on their total monthly bill, making smarter shopping
+          decisions easier than ever.
+        </p>
+      </div>
+
+      <h2><a href="../m/" rel="noopener noreferrer">Mobile version page</a></h2>
+
+      <!--  -->
     </div>
 
     <!-- Scripts -->
@@ -309,7 +377,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-    <script src="../assets/javascript/productTable.js"></script>
     <script src="../assets/javascript/otpModal.js"></script>
+    <script src="../assets/javascript/productTable.js"></script>
   </body>
 </html>
